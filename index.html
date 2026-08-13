@@ -1,260 +1,703 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Northstar Support</title>
-    <!-- Font Awesome Icons (CDN) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Northstar · Self‑Service Support</title>
+
+    <!-- Font Awesome 6 (Free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
     <style>
-        /* T-02: CSS Design System */
-        :root {
-            --primary: #1a2b4c;
-            --gold: #d4af37;
-            --light-bg: #f8f9fc;
-            --card-shadow: 0 8px 20px rgba(0,0,0,0.08);
-            --radius: 12px;
+        /* ---------- APPLE‑INSPIRED DESIGN SYSTEM ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy:       #0a192f;
+            --navy-light: #1a2b4c;
+            --gold:       #d4af37;
+            --gold-soft:  #f5e6b0;
+            --bg:         #f6f8fc;
+            --card-bg:    #ffffff;
+            --radius:     20px;
+            --shadow:     0 12px 40px rgba(10, 25, 47, 0.08);
+            --transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--light-bg);
-            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            padding: 24px;
+            margin: 0;
         }
-        .container { max-width: 900px; width: 100%; }
-        
-        /* Header */
+
+        .container {
+            max-width: 1120px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 48px 40px 40px;
+            transition: var(--transition);
+        }
+
+        /* ----- HEADER ----- */
         .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 48px;
         }
-        .header h1 {
-            color: var(--primary);
-            font-size: 2.2rem;
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--navy);
             letter-spacing: -0.5px;
         }
-        .header h1 i { color: var(--gold); margin-right: 10px; }
-        .header p { color: #555; font-size: 1.1rem; }
+        .header-brand i {
+            color: var(--gold);
+            font-size: 2.2rem;
+        }
+        .header-sub {
+            color: #5b6f82;
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .header-sub i {
+            color: var(--gold);
+        }
+        .header-divider {
+            width: 72px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 4px;
+            margin: 14px auto 0;
+        }
 
-        /* Grid for 2 cards */
+        /* ----- TWO‑COLUMN GRID (responsive) ----- */
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 32px;
         }
 
-        /* Cards */
+        /* ----- CARDS (Apple‑style) ----- */
         .card {
-            background: white;
-            padding: 28px;
-            border-radius: var(--radius);
-            box-shadow: var(--card-shadow);
-            border-top: 5px solid var(--primary);
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 28px 26px 32px;
+            box-shadow: 0 4px 12px rgba(10, 25, 47, 0.04);
+            border: 1px solid rgba(10, 25, 47, 0.05);
+            transition: var(--transition);
         }
-        .card h2 {
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(10, 25, 47, 0.08);
+        }
+        .card-title {
             font-size: 1.3rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        .card h2 i { color: var(--gold); margin-right: 10px; }
-        
-        .input-group {
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 18px;
             display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
+            align-items: center;
+            gap: 12px;
+        }
+        .card-title i {
+            color: var(--gold);
+            font-size: 1.5rem;
+            width: 32px;
+            text-align: center;
+        }
+
+        /* ----- INPUT ROW ----- */
+        .input-row {
+            display: flex;
             flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
         }
-        .input-group input {
+        .input-row input {
             flex: 1;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            min-width: 160px;
+            padding: 14px 18px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
             font-size: 1rem;
-            transition: 0.2s;
-            min-width: 150px;
+            background: #fafcff;
+            transition: var(--transition);
+            font-family: inherit;
+            color: var(--navy);
         }
-        .input-group input:focus {
-            border-color: var(--primary);
+        .input-row input:focus {
+            border-color: var(--gold);
             outline: none;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
         }
-        .input-group button {
-            background: var(--primary);
+        .input-row input::placeholder {
+            color: #a0b3c6;
+            font-weight: 400;
+        }
+        .input-row button {
+            background: var(--navy);
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: bold;
+            padding: 14px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
             cursor: pointer;
-            transition: 0.2s;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             white-space: nowrap;
+            font-family: inherit;
         }
-        .input-group button:hover { background: #2a4b7c; transform: scale(1.02); }
-        .input-group button:active { transform: scale(0.98); }
+        .input-row button i {
+            font-size: 0.9rem;
+        }
+        .input-row button:hover {
+            background: var(--navy-light);
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(10, 25, 47, 0.25);
+        }
+        .input-row button:active {
+            transform: scale(0.97);
+        }
 
+        /* ----- RESULT AREA ----- */
         .result-box {
-            background: #f0f2f5;
-            padding: 15px;
-            border-radius: 8px;
-            min-height: 70px;
+            background: #f8fafd;
+            border-radius: 16px;
+            padding: 18px 20px;
+            min-height: 96px;
             border-left: 4px solid var(--gold);
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
+            color: #1e2a3a;
+            transition: var(--transition);
         }
-        /* Status Badges (T-10) */
+
+        /* ----- STATUS BADGES (pill) ----- */
         .badge {
             display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.8rem;
-            margin-top: 5px;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            background: #eef2f7;
+            color: #2d3f55;
         }
-        .badge-processing { background: #fff3cd; color: #856404; }
-        .badge-shipped { background: #cce5ff; color: #004085; }
-        .badge-delivered { background: #d4edda; color: #155724; }
-        .badge-refund { background: #d1ecf1; color: #0c5460; }
+        .badge-processing { background: #fff7e6; color: #a66b1e; }
+        .badge-shipped    { background: #e0edff; color: #004a9e; }
+        .badge-delivered  { background: #dff0e6; color: #1a6d4a; }
+        .badge-refund     { background: #f0e6ff; color: #5e2e9e; }
 
-        /* Responsive (T-03) */
-        @media (max-width: 650px) {
-            .grid { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.8rem; }
+        /* ----- PROGRESS STEPPER (Apple‑style horizontal) ----- */
+        .stepper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 14px 0 4px;
+            padding: 0 4px;
+            gap: 4px;
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+        .step .dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #fff;
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+        }
+        .step .dot i {
+            font-size: 0.7rem;
+        }
+        .step .label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #8a9baa;
+            margin-top: 5px;
+            font-weight: 600;
+            text-align: center;
+        }
+        /* Completed steps */
+        .step.completed .dot {
+            background: var(--navy);
+            color: #fff;
+        }
+        .step.completed .label {
+            color: var(--navy);
+        }
+        .step.active .dot {
+            background: var(--gold);
+            color: var(--navy);
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.25);
+            transform: scale(1.1);
+        }
+        .step.active .label {
+            color: var(--navy);
+            font-weight: 700;
+        }
+        /* Connecting line */
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: calc(50% + 16px);
+            right: calc(-50% + 16px);
+            height: 2px;
+            background: #e2e8f0;
+            z-index: 1;
+        }
+        .step.completed:not(:last-child)::after {
+            background: var(--navy);
+        }
+        .step.active:not(:last-child)::after {
+            background: var(--gold);
+        }
+
+        /* ----- DEFLECTION FALLBACK (wow factor) ----- */
+        .fallback-block {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #faf5e9;
+            border-radius: 14px;
+            border: 1px dashed var(--gold);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+        }
+        .fallback-block p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #3d3d3d;
+            flex: 1;
+        }
+        .fallback-block p i {
+            color: var(--gold);
+            margin-right: 6px;
         }
         .fallback-btn {
-            background: #e9ecef;
-            color: var(--primary);
-            border: 1px solid #ccc;
-            padding: 6px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            margin-top: 8px;
+            background: transparent;
+            border: 1.5px solid var(--navy);
+            color: var(--navy);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
             font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
         }
-        .fallback-btn:hover { background: #dee2e6; }
+        .fallback-btn:hover {
+            background: var(--navy);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(10, 25, 47, 0.2);
+        }
+
+        /* ----- RESPONSIVE (mobile first) ----- */
+        @media (max-width: 780px) {
+            .container { padding: 28px 18px; }
+            .grid { grid-template-columns: 1fr; gap: 24px; }
+            .header-brand { font-size: 1.6rem; }
+            .input-row button { padding: 12px 20px; }
+            .stepper .label { font-size: 0.5rem; }
+        }
+        @media (max-width: 440px) {
+            .container { padding: 16px 10px; }
+            .card { padding: 20px 14px; }
+            .input-row input { min-width: 120px; padding: 12px; }
+            .fallback-block { flex-direction: column; align-items: stretch; }
+            .fallback-btn { justify-content: center; }
+        }
+
+        /* ----- UTILITY ----- */
+        .mt-8 { margin-top: 8px; }
+        .text-muted { color: #6b7f94; }
+        .flex { display: flex; align-items: center; gap: 8px; }
+        .gap-6 { gap: 6px; }
     </style>
 </head>
 <body>
+
 <div class="container">
-    <!-- Header (T-03) -->
-    <div class="header">
-        <h1><i class="fas fa-store"></i> Northstar Retail</h1>
-        <p><i class="fas fa-robot" style="color:var(--gold);"></i> Self-Service Support — No ticket needed for these 2 categories</p>
-        <hr style="width:80px; margin:10px auto; border:2px solid var(--gold);">
-    </div>
 
-    <!-- Grid of 2 Cards (T-04 & T-05) -->
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-brand">
+            <i class="fas fa-store-alt"></i> Northstar Retail
+        </div>
+        <div class="header-sub">
+            <i class="fas fa-robot"></i> Self‑Service Deflection · Order & Refund Status
+        </div>
+        <div class="header-divider"></div>
+    </header>
+
+    <!-- ===== TWO CARDS ===== -->
     <div class="grid">
-        <!-- Card 1: Order Status -->
-        <div class="card">
-            <h2><i class="fas fa-box"></i> Order Status</h2>
-            <div class="input-group">
-                <input type="text" id="orderInput" placeholder="e.g. #1001">
-                <button onclick="checkOrder()"><i class="fas fa-search"></i> Check</button>
-            </div>
-            <div id="orderResult" class="result-box">
-                <i class="fas fa-info-circle"></i> Awaiting order number...
-            </div>
-        </div>
 
-        <!-- Card 2: Returns / Refunds -->
-        <div class="card">
-            <h2><i class="fas fa-undo-alt"></i> Refund Status</h2>
-            <div class="input-group">
-                <input type="text" id="refundInput" placeholder="e.g. #1001">
-                <button onclick="checkRefund()"><i class="fas fa-coins"></i> Check</button>
+        <!-- ========== CARD 1: ORDER STATUS ========== -->
+        <section class="card">
+            <div class="card-title">
+                <i class="fas fa-box"></i> Order Status
             </div>
+
+            <div class="input-row">
+                <input type="text" id="orderInput" placeholder="e.g. #1001" aria-label="Order ID" />
+                <button onclick="handleOrderStatus()">
+                    <i class="fas fa-search"></i> Check
+                </button>
+            </div>
+
+            <div id="orderResult" class="result-box">
+                <i class="fas fa-info-circle text-muted"></i> <span class="text-muted">Enter an order number to begin.</span>
+            </div>
+        </section>
+
+        <!-- ========== CARD 2: REFUND STATUS ========== -->
+        <section class="card">
+            <div class="card-title">
+                <i class="fas fa-undo-alt"></i> Refund Status
+            </div>
+
+            <div class="input-row">
+                <input type="text" id="refundInput" placeholder="e.g. #1001" aria-label="Order ID" />
+                <button onclick="handleRefundStatus()">
+                    <i class="fas fa-coins"></i> Check
+                </button>
+            </div>
+
             <div id="refundResult" class="result-box">
-                <i class="fas fa-info-circle"></i> Awaiting order number...
+                <i class="fas fa-info-circle text-muted"></i> <span class="text-muted">Enter an order number to begin.</span>
             </div>
-        </div>
+        </section>
+
     </div>
 </div>
 
+
+<!-- ============================================================ -->
+<!-- =====  JAVASCRIPT — CLEAN, COMMENTED, PRODUCTION‑READY  ===== -->
+<!-- ============================================================ -->
 <script>
-    // T-06: Mock Database (6 orders)
-    const orderDatabase = {
-        "#1001": { status: "Delivered", delivery: "Aug 10, 2026", refund: null },
-        "#1002": { status: "Shipped", delivery: "Aug 18, 2026", refund: null },
-        "#1003": { status: "Processing", delivery: "Aug 22, 2026", refund: "Approved: $79.99 (2-3 days)" },
-        "#1004": { status: "Delivered", delivery: "Aug 5, 2026", refund: "Pending review" },
-        "#1005": { status: "Shipped", delivery: "Aug 16, 2026", refund: null },
-        "#1006": { status: "Processing", delivery: "Aug 25, 2026", refund: "Approved: $45.00 (1-2 days)" }
-    };
+    (function() {
+        'use strict';
 
-    // Helper to get badge HTML
-    function getBadge(status) {
-        const map = {
-            "Processing": '<span class="badge badge-processing">⏳ Processing</span>',
-            "Shipped": '<span class="badge badge-shipped">🚚 Shipped</span>',
-            "Delivered": '<span class="badge badge-delivered">✅ Delivered</span>'
+        // ---------- MOCK DATABASE (6 diverse orders) ----------
+        // In production, this would be replaced by a fetch() to a REST API.
+        const orderDatabase = {
+            '#1001': {
+                status: 'Delivered',
+                deliveryDate: 'August 10, 2026',
+                refund: null,   // no refund
+                steps: ['ordered', 'shipped', 'out-for-delivery', 'delivered']
+            },
+            '#1002': {
+                status: 'Shipped',
+                deliveryDate: 'August 18, 2026',
+                refund: null,
+                steps: ['ordered', 'shipped']
+            },
+            '#1003': {
+                status: 'Processing',
+                deliveryDate: 'August 22, 2026',
+                refund: 'Approved · $79.99 (refund in 2‑3 days)',
+                steps: ['ordered']
+            },
+            '#1004': {
+                status: 'Delivered',
+                deliveryDate: 'August 5, 2026',
+                refund: 'Pending · We’re reviewing your return request',
+                steps: ['ordered', 'shipped', 'out-for-delivery', 'delivered']
+            },
+            '#1005': {
+                status: 'Shipped',
+                deliveryDate: 'August 16, 2026',
+                refund: null,
+                steps: ['ordered', 'shipped']
+            },
+            '#1006': {
+                status: 'Processing',
+                deliveryDate: 'August 25, 2026',
+                refund: 'Approved · $45.00 (refund in 1‑2 days)',
+                steps: ['ordered']
+            }
         };
-        return map[status] || status;
-    }
 
-    // T-07 & T-09: Order Status Logic
-    function checkOrder() {
-        const input = document.getElementById('orderInput');
-        const result = document.getElementById('orderResult');
-        const val = input.value.trim();
-
-        // Error Handling
-        if (val === "") {
-            result.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#d4af37;"></i> Please enter an Order ID (e.g., #1001)';
-            return;
+        // ---------- HELPER: Format status badge HTML ----------
+        function getStatusBadge(status) {
+            const map = {
+                'Processing': '<span class="badge badge-processing"><i class="fas fa-sync-alt fa-fw"></i> Processing</span>',
+                'Shipped':    '<span class="badge badge-shipped"><i class="fas fa-truck fa-fw"></i> Shipped</span>',
+                'Delivered':  '<span class="badge badge-delivered"><i class="fas fa-check-circle fa-fw"></i> Delivered</span>'
+            };
+            return map[status] || `<span class="badge">${status}</span>`;
         }
-        // Auto-fix missing '#'
-        const formatted = val.startsWith('#') ? val : `#${val}`;
-        
-        const order = orderDatabase[formatted];
-        if (!order) {
-            result.innerHTML = `
-                <i class="fas fa-frown" style="color:#d4af37;"></i> We couldn't find "${formatted}".
-                <br><button class="fallback-btn" onclick="alert('Support ticket opened for ${formatted}')">
-                <i class="fas fa-ticket-alt"></i> Open a support ticket (auto-filled)</button>
+
+        // ---------- HELPER: Build progress stepper (Apple‑style) ----------
+        function buildStepper(orderSteps, currentStatus) {
+            // Map statuses to step indices for highlighting
+            const stepMap = {
+                'Processing': 0,
+                'Shipped': 1,
+                'out-for-delivery': 2,
+                'Delivered': 3
+            };
+            const activeIndex = stepMap[currentStatus] ?? 0;
+
+            // Define visual steps (icons + labels)
+            const stepDefs = [
+                { icon: 'fa-clipboard-list', label: 'Ordered' },
+                { icon: 'fa-truck', label: 'Shipped' },
+                { icon: 'fa-route', label: 'In Transit' },
+                { icon: 'fa-home', label: 'Delivered' }
+            ];
+
+            let html = '<div class="stepper">';
+            stepDefs.forEach((def, idx) => {
+                let cls = 'step';
+                if (idx < activeIndex) cls += ' completed';
+                else if (idx === activeIndex) cls += ' active';
+                html += `
+                    <div class="${cls}">
+                        <div class="dot"><i class="fas ${def.icon}"></i></div>
+                        <div class="label">${def.label}</div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        // ---------- CORE: Order Status lookup ----------
+        function lookupOrder(rawInput) {
+            const trimmed = rawInput.trim();
+            if (trimmed === '') return { error: 'empty' };
+
+            // Auto‑prefix '#' if missing (user‑friendly)
+            const formatted = trimmed.startsWith('#') ? trimmed : `#${trimmed}`;
+            const order = orderDatabase[formatted];
+            if (!order) return { error: 'not_found', input: formatted };
+
+            return { success: true, order, id: formatted };
+        }
+
+        // ---------- RENDER: Order Status result ----------
+        function renderOrderResult(resultDiv, lookup) {
+            if (lookup.error === 'empty') {
+                resultDiv.innerHTML = `
+                    <i class="fas fa-exclamation-triangle" style="color:var(--gold);"></i>
+                    Please enter an Order ID (e.g., #1001).
+                `;
+                return;
+            }
+
+            if (lookup.error === 'not_found') {
+                // ★★★ THE 'WOW' DEFLECTION STRATEGY ★★★
+                // Instead of a dead‑end error, we offer a support ticket with auto‑fill.
+                resultDiv.innerHTML = `
+                    <div class="fallback-block">
+                        <p>
+                            <i class="fas fa-robot"></i>
+                            <strong>We couldn’t find <code>${lookup.input}</code>.</strong>
+                            Our bot is checking the warehouse system. In the meantime…
+                        </p>
+                        <button class="fallback-btn" onclick="openSupportTicket('${lookup.input}')">
+                            <i class="fas fa-ticket-alt"></i> Open a support ticket
+                        </button>
+                    </div>
+                    <div style="margin-top:8px;font-size:0.8rem;color:#6b7f94;">
+                        <i class="fas fa-info-circle"></i> Ticket will be auto‑filled with your order ID.
+                    </div>
+                `;
+                return;
+            }
+
+            // ---- SUCCESS ----
+            const o = lookup.order;
+            const badge = getStatusBadge(o.status);
+            const stepper = buildStepper(o.steps, o.status);
+
+            resultDiv.innerHTML = `
+                <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;">
+                    <div>
+                        <strong style="font-size:1.1rem;color:var(--navy);">${lookup.id}</strong>
+                        ${badge}
+                    </div>
+                    <span style="font-size:0.85rem;color:#5b6f82;">
+                        <i class="fas fa-calendar-alt"></i> Est. ${o.deliveryDate}
+                    </span>
+                </div>
+                ${stepper}
+                <div style="margin-top:10px;font-size:0.9rem;color:#2d3f55;background:#f0f4fe;padding:8px 14px;border-radius:12px;">
+                    <i class="fas fa-route" style="color:var(--gold);"></i>
+                    Current status: <strong>${o.status}</strong>
+                    ${o.status === 'Shipped' ? ' — Your package is on the move!' : ''}
+                    ${o.status === 'Delivered' ? ' — Enjoy your order!' : ''}
+                </div>
             `;
-            return;
         }
 
-        // Success
-        result.innerHTML = `
-            <strong>${formatted}</strong> — ${getBadge(order.status)}<br>
-            <i class="fas fa-calendar-alt"></i> Expected delivery: ${order.delivery}
-        `;
-    }
+        // ---------- RENDER: Refund Status result ----------
+        function renderRefundResult(resultDiv, lookup) {
+            if (lookup.error === 'empty') {
+                resultDiv.innerHTML = `
+                    <i class="fas fa-exclamation-triangle" style="color:var(--gold);"></i>
+                    Please enter an Order ID (e.g., #1001).
+                `;
+                return;
+            }
 
-    // T-08 & T-09: Refund Logic
-    function checkRefund() {
-        const input = document.getElementById('refundInput');
-        const result = document.getElementById('refundResult');
-        const val = input.value.trim();
+            if (lookup.error === 'not_found') {
+                // ★★★ SAME DEFLECTION FOR REFUNDS ★★★
+                resultDiv.innerHTML = `
+                    <div class="fallback-block">
+                        <p>
+                            <i class="fas fa-robot"></i>
+                            <strong>No refund record for <code>${lookup.input}</code>.</strong>
+                            Our bot is checking — click below to open a ticket.
+                        </p>
+                        <button class="fallback-btn" onclick="openSupportTicket('${lookup.input}')">
+                            <i class="fas fa-ticket-alt"></i> Open a refund ticket
+                        </button>
+                    </div>
+                    <div style="margin-top:8px;font-size:0.8rem;color:#6b7f94;">
+                        <i class="fas fa-info-circle"></i> We’ll auto‑fill your order details.
+                    </div>
+                `;
+                return;
+            }
 
-        if (val === "") {
-            result.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#d4af37;"></i> Please enter an Order ID (e.g., #1001)';
-            return;
-        }
-        const formatted = val.startsWith('#') ? val : `#${val}`;
-        
-        const order = orderDatabase[formatted];
-        if (!order) {
-            result.innerHTML = `
-                <i class="fas fa-frown" style="color:#d4af37;"></i> No order found for "${formatted}".
-                <br><button class="fallback-btn" onclick="alert('Refund ticket opened for ${formatted}')">Open a refund ticket</button>
+            // ---- SUCCESS ----
+            const o = lookup.order;
+            const refundStatus = o.refund;
+
+            if (!refundStatus) {
+                resultDiv.innerHTML = `
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <i class="fas fa-check-circle" style="color:#2e7d5e;font-size:1.4rem;"></i>
+                        <div>
+                            <strong>${lookup.id}</strong> — No refund requested.
+                            <div style="font-size:0.85rem;color:#5b6f82;margin-top:4px;">
+                                Your order ${o.status.toLowerCase()} on ${o.deliveryDate}.
+                            </div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Refund exists — show detailed status
+            let refundBadge = '';
+            if (refundStatus.includes('Approved')) {
+                refundBadge = '<span class="badge badge-refund"><i class="fas fa-check-circle"></i> Refund Approved</span>';
+            } else if (refundStatus.includes('Pending')) {
+                refundBadge = '<span class="badge badge-processing"><i class="fas fa-clock"></i> Refund Pending</span>';
+            } else {
+                refundBadge = `<span class="badge">${refundStatus}</span>`;
+            }
+
+            resultDiv.innerHTML = `
+                <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;">
+                    <div>
+                        <strong style="font-size:1.1rem;color:var(--navy);">${lookup.id}</strong>
+                        ${refundBadge}
+                    </div>
+                    <span style="font-size:0.85rem;color:#5b6f82;">
+                        <i class="fas fa-calendar-alt"></i> Order: ${o.deliveryDate}
+                    </span>
+                </div>
+                <div style="margin-top:12px;background:#f9f6f0;padding:12px 16px;border-radius:14px;border-left:3px solid var(--gold);">
+                    <i class="fas fa-info-circle" style="color:var(--gold);"></i>
+                    <strong>Status:</strong> ${refundStatus}
+                </div>
             `;
-            return;
         }
 
-        if (!order.refund) {
-            result.innerHTML = `<i class="fas fa-check-circle" style="color:green;"></i> No refund requested for ${formatted}.`;
-        } else {
-            result.innerHTML = `
-                <i class="fas fa-coins" style="color:var(--gold);"></i> <strong>Refund Status:</strong> ${order.refund}
-                <br><span class="badge badge-refund">💰 Active</span>
-            `;
-        }
-    }
+        // ---------- PUBLIC HANDLERS (called by onclick) ----------
+        window.handleOrderStatus = function() {
+            const input = document.getElementById('orderInput');
+            const result = document.getElementById('orderResult');
+            const lookup = lookupOrder(input.value);
+            renderOrderResult(result, lookup);
+        };
+
+        window.handleRefundStatus = function() {
+            const input = document.getElementById('refundInput');
+            const result = document.getElementById('refundResult');
+            const lookup = lookupOrder(input.value);
+            renderRefundResult(result, lookup);
+        };
+
+        // ---------- DEFLECTION: Support Ticket (simulated) ----------
+        window.openSupportTicket = function(orderId) {
+            const ticketNumber = 'T-' + Date.now().toString().slice(-6);
+            // In a real system, this would POST to a ticketing API.
+            // Here we simulate the action with a polished, professional alert.
+            alert(
+                `✅ Support ticket ${ticketNumber} opened for ${orderId}.\n\n` +
+                `📋 Order ID: ${orderId} (auto‑filled)\n` +
+                `👤 Agent: Assigned to the next available specialist.\n` +
+                `📧 You will receive a confirmation email within 5 minutes.\n\n` +
+                `✦ This automated deflection saved a manual support request. ✦`
+            );
+            // Optional: you could also clear the input or show a confirmation in the UI.
+        };
+
+        // ---------- ENTER KEY SUPPORT (UX polish) ----------
+        document.getElementById('orderInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') window.handleOrderStatus();
+        });
+        document.getElementById('refundInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') window.handleRefundStatus();
+        });
+
+        // ---------- AUTO‑FOCUS FIRST INPUT (Apple‑like) ----------
+        window.addEventListener('load', () => {
+            document.getElementById('orderInput').focus();
+        });
+
+    })(); // end IIFE — no global pollution except our two handlers + ticket opener
 </script>
+
 </body>
 </html>

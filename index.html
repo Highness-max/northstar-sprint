@@ -566,6 +566,9 @@
                 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;">
                     <div>
                         <strong style="font-size:1.1rem;color:var(--navy);">${lookup.id}</strong>
+<button onclick="copyOrderId('${lookup.id}')" style="background:transparent;border:1px solid #ddd;border-radius:20px;padding:2px 12px;cursor:pointer;font-size:0.7rem;margin-left:8px;">
+    <i class="far fa-copy"></i> Copy
+</button>
                         ${badge}
                     </div>
                     <span style="font-size:0.85rem;color:#5b6f82;">
@@ -709,6 +712,14 @@ window.clearOrderResult = function () {
     `;
 };
     })(); // end IIFE — no global pollution except our two handlers + ticket opener
+    // DEV-4: Copy Order ID to clipboard
+function copyOrderId(orderId) {
+    navigator.clipboard.writeText(orderId).then(() => {
+        alert('✅ Copied ' + orderId + ' to clipboard!');
+    }).catch(() => {
+        alert('⚠️ Could not copy. Please select the ID manually.');
+    });
+}
 </script>
 
 </body>

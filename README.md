@@ -18,11 +18,11 @@ Double-click index.html in any web browser. No installation needed.
 | #1007 | Shipped | Pending |
 
 ## 👥 Team Contributors
-- Captain: Highness-max (Setup + Design)
-- Dev-2: [Name] (Clear Button)
-- Dev-3: [Name] (7th Mock Order)
-- Dev-4: [Name] (Copy Feature)
-- Dev-5: [Name] (Documentation)
+- Captain: Sir Nchoe Lehan (Setup + Design)
+- Dev-2:  Grace Murithii (Clear Button)
+- Dev-3: Abdijabir Ali (7th Mock Order)
+- Dev-4: Jacinta Amana (Copy Feature)
+- Dev-5: Koech Aaron (Documentation)
 
 ## 📝 Audit Trail
 See AUDIT_TRAIL.txt for the full commit history.

@@ -3,16 +3,17 @@
 ## Project
 
 Northstar Retail – Support Deflection MVP (Self-Service Dashboard)
+Created by : Grace Muriithi
 
 ## Team Members
 
-| Member | Role |
-|--------|------|
-| Grace Muriithi | Team Lead, Documentation, Clear Button |
-| Collins Leshan | Repository Owner, Dashboard Design, Order Status |
-| Koech Aaron | Documentation |
-| Jacinta Amana | Returns Section, Copy Feature |
-| Abdijabir Ali | Testing, Mock Order Data |
+| Member | Final Role & Contribution |
+|--------|----------------------------|
+| Collins Leshan | Repository Owner, Lead Developer, Self-Service Dashboard Development, QA Test Matrix, and README Contributor Updates |
+| Grace Muriithi | Team Co-ordination,  Team Charter Author and Clear Button Feature for the Order Status section |
+| Koech Aaron | README Setup and Initial Project Documentation |
+| Jacinta Amana | Copy-to-Clipboard Feature for Order IDs and User Experience Enhancement |
+| Abdijabir Ali | Go-Live Readiness Documentation, Mock Order Data Updates (#1007), Repository Maintenance, and Merge Management |
 
 ---
 

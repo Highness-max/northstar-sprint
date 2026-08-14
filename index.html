@@ -727,6 +727,19 @@ function copyOrderId(orderId) {
         alert('⚠️ Could not copy. Please select the ID manually.');
     });
 }
+// Grace: Keyboard shortcut - Ctrl+Enter to check order
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.key === 'Enter') {
+        const active = document.activeElement;
+        if (active && active.id === 'orderInput') {
+            e.preventDefault();
+            window.handleOrderStatus();
+        } else if (active && active.id === 'refundInput') {
+            e.preventDefault();
+            window.handleRefundStatus();
+        }
+    }
+});
 </script>
 
 </body>

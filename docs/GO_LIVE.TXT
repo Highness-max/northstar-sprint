@@ -1,0 +1,27 @@
+O-LIVE READINESS NOTE - NORTHSTAR RETAIL
+
+Date: August 14, 2026
+Prepared by: Abdijabir Ali Issack
+
+1. WHAT WORKS (MVP covers 2 ticket types):
+   - Order Status: Works perfectly for 7 mock orders (#1001 to #1007). Shows colored badges (Processing/Shipped/Delivered) and an Apple-style progress stepper.
+   - Returns/Refunds: Works perfectly. Displays "Approved", "Pending", or "No refund" messages with clear status badges.
+   - Deflection Strategy: If an order isn't found, the bot offers an "Open support ticket" button that auto-fills the order ID—proving we reduce manual ticket creation.
+   - Clear Button: Quickly resets the Order Status input.
+   - Copy Button: Copies order ID to clipboard with one click.
+
+2. KNOWN-BROKEN (Radical Transparency):
+   - Stock Availability (third category) is NOT built (deferred as per MVP scope).
+   - The database is hardcoded (mock data)—not connected to Northstar's real API yet.
+   - The "Copy" button requires HTTPS or localhost for clipboard access in some browsers.
+
+3. HANDOVER INSTRUCTIONS (For Northstar's internal team):
+   - Open the folder and double-click "index.html". It runs in ANY browser. No server required.
+   - To add real orders, open index.html in Notepad, find the "orderDatabase" object, and replace the mock entries with API calls.
+   - The audit trail (AUDIT_TRAIL.txt) proves 5 developers collaborated on this build.
+
+4. TEAM CONTRIBUTORS:
+     - Grace Muriithi: Clear button on Order Status card
+   - Jacinta Amanah: Copy-to-clipboard feature
+   - koech-aaron: README.md documentation
+    - - Highness-max (Sir Nchoe Leshan): Core design, stepper, deflection strategy, QA

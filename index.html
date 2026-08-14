@@ -419,6 +419,11 @@
     </div>
 </div>
 
+<div style="text-align:center;margin-top:20px;">
+    <button onclick="resetAll()" style="background:#e74c3c;color:white;border:none;padding:10px 25px;border-radius:40px;cursor:pointer;font-size:0.9rem;">
+        <i class="fas fa-undo-alt"></i> Reset All
+    </button>
+</div>
 
 <!-- ============================================================ -->
 <!-- =====  JAVASCRIPT — CLEAN, COMMENTED, PRODUCTION‑READY  ===== -->
@@ -727,6 +732,21 @@ function copyOrderId(orderId) {
         alert('⚠️ Could not copy. Please select the ID manually.');
     });
 }
+
+// koech-aaron: Reset all inputs and results
+function resetAll() {
+    document.getElementById('orderInput').value = '';
+    document.getElementById('refundInput').value = '';
+    document.getElementById('orderResult').innerHTML = `
+        <i class="fas fa-info-circle text-muted"></i> 
+        <span class="text-muted">Enter an order number to begin.</span>
+    `;
+    document.getElementById('refundResult').innerHTML = `
+        <i class="fas fa-info-circle text-muted"></i> 
+        <span class="text-muted">Enter an order number to begin.</span>
+    `;
+}
+
 </script>
 
 </body>

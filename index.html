@@ -380,6 +380,9 @@
             <div class="card-title">
                 <i class="fas fa-box"></i> Order Status
             </div>
+            <div style="font-size:0.8rem;color:#6b7f94;margin-bottom:10px;">
+    <i class="fas fa-database"></i> Total Orders: <span id="totalOrders">7</span>
+</div>
 
             <div class="input-row">
     <input type="text" id="orderInput" placeholder="e.g. #1001" aria-label="Order ID" />
@@ -726,7 +729,16 @@ function copyOrderId(orderId) {
     }).catch(() => {
         alert('⚠️ Could not copy. Please select the ID manually.');
     });
+}// Grace: Total orders counter - updates when a new order is added
+// This function counts all orders in the database
+function updateTotalOrders() {
+    const count = Object.keys(orderDatabase).length;
+    const el = document.getElementById('totalOrders');
+    if (el) el.textContent = count;
 }
+
+// Call it on page load
+window.addEventListener('load', updateTotalOrders);
 </script>
 
 </body>

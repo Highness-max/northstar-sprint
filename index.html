@@ -382,11 +382,16 @@
             </div>
 
             <div class="input-row">
-                <input type="text" id="orderInput" placeholder="e.g. #1001" aria-label="Order ID" />
-                <button onclick="handleOrderStatus()">
-                    <i class="fas fa-search"></i> Check
-                </button>
-            </div>
+    <input type="text" id="orderInput" placeholder="e.g. #1001" aria-label="Order ID" />
+
+    <button onclick="handleOrderStatus()">
+        <i class="fas fa-search"></i> Check
+    </button>
+
+    <button onclick="clearOrderResult()" style="background:#1a2b4c;">
+        <i class="fas fa-undo"></i> Clear
+    </button>
+</div>
 
             <div id="orderResult" class="result-box">
                 <i class="fas fa-info-circle text-muted"></i> <span class="text-muted">Enter an order number to begin.</span>
@@ -695,7 +700,14 @@
         window.addEventListener('load', () => {
             document.getElementById('orderInput').focus();
         });
-
+        // DEV-2: Clear button function
+window.clearOrderResult = function () {
+    document.getElementById('orderInput').value = '';
+    document.getElementById('orderResult').innerHTML = `
+        <i class="fas fa-info-circle text-muted"></i>
+        <span class="text-muted">Cleared. Enter a new order.</span>
+    `;
+};
     })(); // end IIFE — no global pollution except our two handlers + ticket opener
 </script>
 

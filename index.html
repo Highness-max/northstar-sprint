@@ -516,10 +516,10 @@ function toggleDarkMode() {
         </section>
 
     </div>
-    <footer style="margin-top:40px;padding-top:20px;border-top:1px solid #e2e8f0;text-align:center;font-size:0.85rem;color:#6b7f94;">
+   <footer style="margin-top:40px;padding-top:20px;border-top:1px solid #e2e8f0;text-align:center;font-size:0.85rem;color:#6b7f94;">
     <p>
         <i class="fas fa-users"></i> Built by: 
-        <strong>Sir Nchoe Leshan</strong> · 
+        <strong>Highness-max</strong> · 
         <strong>Grace Muriithi</strong> · 
         <strong>Jacinta Amanah</strong> · 
         <strong>koech-aaron</strong> · 
@@ -527,6 +527,11 @@ function toggleDarkMode() {
     </p>
     <p style="margin-top:4px;">
         <i class="fas fa-robot"></i> Northstar Retail · Support Deflection MVP
+    </p>
+    <p style="margin-top:10px;">
+        <a href="#" onclick="contactSupport()" style="color:var(--gold);font-weight:600;text-decoration:none;border:1px solid var(--gold);padding:6px 18px;border-radius:30px;display:inline-block;transition:0.2s;">
+            <i class="fas fa-headset"></i> Contact Support
+        </a>
     </p>
 </footer>
 </div>
@@ -1037,7 +1042,39 @@ function toggleDarkMode() {
         });
     }
 }
-
+// Abdi: Contact Support link with auto-filled order ID
+function contactSupport() {
+    // Try to get the last searched order from either input
+    const orderInput = document.getElementById('orderInput');
+    const refundInput = document.getElementById('refundInput');
+    let orderId = '';
+    
+    if (orderInput && orderInput.value.trim() !== '') {
+        const val = orderInput.value.trim();
+        orderId = val.startsWith('#') ? val : `#${val}`;
+    } else if (refundInput && refundInput.value.trim() !== '') {
+        const val = refundInput.value.trim();
+        orderId = val.startsWith('#') ? val : `#${val}`;
+    }
+    
+    if (orderId) {
+        alert(
+            `📧 Support Request Opened\n\n` +
+            `📋 Order ID: ${orderId} (auto-filled)\n` +
+            `👤 Agent: Assigned immediately\n` +
+            `📞 Response time: ~5-10 minutes\n\n` +
+            `✨ A human agent will contact you shortly.`
+        );
+    } else {
+        alert(
+            `📧 Support Request Opened\n\n` +
+            `📋 Order ID: Not provided (please enter one first)\n` +
+            `👤 Agent: Assigned immediately\n` +
+            `📞 Response time: ~5-10 minutes\n\n` +
+            `✨ Please provide your order ID when the agent responds.`
+        );
+    }
+}
 </script>
 
 </body>

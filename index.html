@@ -749,9 +749,24 @@ function updateTotalOrders() {
     const el = document.getElementById('totalOrders');
     if (el) el.textContent = count;
 }
+feature/keyboard-shortcut
+// Grace: Keyboard shortcut - Ctrl+Enter to check order
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.key === 'Enter') {
+        const active = document.activeElement;
+        if (active && active.id === 'orderInput') {
+            e.preventDefault();
+            window.handleOrderStatus();
+        } else if (active && active.id === 'refundInput') {
+            e.preventDefault();
+            window.handleRefundStatus();
+        }
+    }
+});
 
 // Call it on page load
 window.addEventListener('load', updateTotalOrders);
+  main
 </script>
 
 </body>

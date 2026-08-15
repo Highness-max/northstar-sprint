@@ -355,6 +355,72 @@
         .text-muted { color: #6b7f94; }
         .flex { display: flex; align-items: center; gap: 8px; }
         .gap-6 { gap: 6px; }
+
+        // Highness-max: Dark mode toggle
+function toggleDarkMode() {
+    const body = document.body;
+    const container = document.querySelector('.container');
+    const cards = document.querySelectorAll('.card');
+    const resultBoxes = document.querySelectorAll('.result-box');
+    const btn = document.querySelector('[onclick="toggleDarkMode()"]');
+    
+    // Toggle dark mode class
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        // Dark mode styles
+        btn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+        body.style.background = '#0a192f';
+        body.style.color = '#e8edf3';
+        container.style.background = '#1a2b4c';
+        container.style.color = '#e8edf3';
+        cards.forEach(c => {
+            c.style.background = '#243b5c';
+            c.style.borderColor = 'rgba(255,255,255,0.05)';
+            c.style.color = '#e8edf3';
+        });
+        resultBoxes.forEach(r => {
+            r.style.background = '#1a2b4c';
+            r.style.color = '#e8edf3';
+            r.style.borderLeftColor = '#d4af37';
+        });
+        // Fix input text color
+        document.querySelectorAll('.input-row input').forEach(i => {
+            i.style.background = '#0a192f';
+            i.style.color = '#e8edf3';
+            i.style.borderColor = '#3a5b7c';
+        });
+        // Fix result box text inside
+        document.querySelectorAll('.result-box .text-muted').forEach(t => {
+            t.style.color = '#b0c4d8';
+        });
+    } else {
+        // Light mode styles (reset to defaults)
+        btn.innerHTML = '<i class="fas fa-moon"></i> Toggle Dark Mode';
+        body.style.background = '';
+        body.style.color = '';
+        container.style.background = '';
+        container.style.color = '';
+        cards.forEach(c => {
+            c.style.background = '';
+            c.style.borderColor = '';
+            c.style.color = '';
+        });
+        resultBoxes.forEach(r => {
+            r.style.background = '';
+            r.style.color = '';
+            r.style.borderLeftColor = '';
+        });
+        document.querySelectorAll('.input-row input').forEach(i => {
+            i.style.background = '';
+            i.style.color = '';
+            i.style.borderColor = '';
+        });
+        document.querySelectorAll('.result-box .text-muted').forEach(t => {
+            t.style.color = '';
+        });
+    }
+}
     </style>
 </head>
 <body>
@@ -370,6 +436,13 @@
             <i class="fas fa-robot"></i> Self‑Service Deflection · Order & Refund Status
         </div>
         <div class="header-divider"></div>
+        <!-- Highness-max: Dark Mode Toggle -->
+<div style="margin-top:15px;">
+    <button onclick="toggleDarkMode()" style="background:var(--navy);color:white;border:none;padding:10px 24px;border-radius:40px;cursor:pointer;font-size:0.85rem;font-weight:600;transition:0.2s;font-family:inherit;box-shadow:0 4px 12px rgba(10,25,47,0.15);">
+        <i class="fas fa-moon"></i> Toggle Dark Mode
+    </button>
+</div>
+
     </header>
 
     <!-- ===== TWO CARDS ===== -->
@@ -800,6 +873,72 @@ function clearRefundResult() {
         <i class="fas fa-info-circle text-muted"></i> 
         <span class="text-muted">Cleared. Enter a new order.</span>
     `;
+}
+
+// Captain: Dark mode toggle
+function toggleDarkMode() {
+    const body = document.body;
+    const container = document.querySelector('.container');
+    const cards = document.querySelectorAll('.card');
+    const resultBoxes = document.querySelectorAll('.result-box');
+    const btn = document.querySelector('[onclick="toggleDarkMode()"]');
+    
+    // Toggle dark mode class
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        // Dark mode styles
+        btn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+        body.style.background = '#0a192f';
+        body.style.color = '#e8edf3';
+        container.style.background = '#1a2b4c';
+        container.style.color = '#e8edf3';
+        cards.forEach(c => {
+            c.style.background = '#243b5c';
+            c.style.borderColor = 'rgba(255,255,255,0.05)';
+            c.style.color = '#e8edf3';
+        });
+        resultBoxes.forEach(r => {
+            r.style.background = '#1a2b4c';
+            r.style.color = '#e8edf3';
+            r.style.borderLeftColor = '#d4af37';
+        });
+        // Fix input text color
+        document.querySelectorAll('.input-row input').forEach(i => {
+            i.style.background = '#0a192f';
+            i.style.color = '#e8edf3';
+            i.style.borderColor = '#3a5b7c';
+        });
+        // Fix result box text inside
+        document.querySelectorAll('.result-box .text-muted').forEach(t => {
+            t.style.color = '#b0c4d8';
+        });
+    } else {
+        // Light mode styles (reset to defaults)
+        btn.innerHTML = '<i class="fas fa-moon"></i> Toggle Dark Mode';
+        body.style.background = '';
+        body.style.color = '';
+        container.style.background = '';
+        container.style.color = '';
+        cards.forEach(c => {
+            c.style.background = '';
+            c.style.borderColor = '';
+            c.style.color = '';
+        });
+        resultBoxes.forEach(r => {
+            r.style.background = '';
+            r.style.color = '';
+            r.style.borderLeftColor = '';
+        });
+        document.querySelectorAll('.input-row input').forEach(i => {
+            i.style.background = '';
+            i.style.color = '';
+            i.style.borderColor = '';
+        });
+        document.querySelectorAll('.result-box .text-muted').forEach(t => {
+            t.style.color = '';
+        });
+    }
 }
 
 </script>

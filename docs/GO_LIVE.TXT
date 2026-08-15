@@ -1,7 +1,8 @@
-O-LIVE READINESS NOTE - NORTHSTAR RETAIL
 
-Date: August 14, 2026
-Prepared by: Abdijabir Ali Issack
+GO-LIVE READINESS NOTE - NORTHSTAR RETAIL
+
+Date: August 15, 2026
+Prepared by: Abdijabir Ali (DevOps Lead)
 
 1. WHAT WORKS (MVP covers 2 ticket types):
    - Order Status: Works perfectly for 7 mock orders (#1001 to #1007). Shows colored badges (Processing/Shipped/Delivered) and an Apple-style progress stepper.
@@ -9,6 +10,9 @@ Prepared by: Abdijabir Ali Issack
    - Deflection Strategy: If an order isn't found, the bot offers an "Open support ticket" button that auto-fills the order ID—proving we reduce manual ticket creation.
    - Clear Button: Quickly resets the Order Status input.
    - Copy Button: Copies order ID to clipboard with one click.
+   - Dark Mode: Toggle between light and dark themes for accessibility.
+   - Total Orders Counter: Shows the number of orders in the database.
+   - Loading Spinner: Simulates API response for better UX.
 
 2. KNOWN-BROKEN (Radical Transparency):
    - Stock Availability (third category) is NOT built (deferred as per MVP scope).
@@ -21,7 +25,7 @@ Prepared by: Abdijabir Ali Issack
    - The audit trail (AUDIT_TRAIL.txt) proves 5 developers collaborated on this build.
 
 4. TEAM CONTRIBUTORS:
-     - Grace Muriithi: Clear button on Order Status card
-   - Jacinta Amanah: Copy-to-clipboard feature
-   - koech-aaron: README.md documentation
-    - - Highness-max (Sir Nchoe Leshan): Core design, stepper, deflection strategy, QA
+    - Grace Muriithi: Total orders counter, keyboard shortcut, clear button
+   - Jacinta Amanah: Team footer, toast notification, copy feature
+   - koech-aaron: Reset all button, loading spinner simulation
+   - Abdi: Go-Live Note, Contact Support link

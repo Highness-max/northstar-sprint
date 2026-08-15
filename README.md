@@ -18,11 +18,10 @@ Double-click index.html in any web browser. No installation needed.
 | #1007 | Shipped | Pending |
 
 ## 👥 Team Contributors
-- Captain: Sir Nchoe Lehan (Setup + Design)
-- Dev-2:  Grace Murithii (Clear Button)
-- Dev-3: Abdijabir Ali (7th Mock Order)
-- Dev-4: Jacinta Amana (Copy Feature)
-- Dev-5: Koech Aaron (Documentation)
-
+- Highness-max (Sir Nchoe Leshan): Core design, stepper, deflection strategy, QA, dark mode
+- Grace Muriithi: Clear button, total orders counter, keyboard shortcut
+- Jacinta Amanah: Team footer, toast notification, copy-to-clipboard
+- koech-aaron: Reset all button, loading spinner
+- Abdi: Go-Live Note, contact support link
 ## 📝 Audit Trail
 See AUDIT_TRAIL.txt for the full commit history.

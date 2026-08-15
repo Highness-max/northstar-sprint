@@ -355,6 +355,25 @@
         .text-muted { color: #6b7f94; }
         .flex { display: flex; align-items: center; gap: 8px; }
         .gap-6 { gap: 6px; }
+ feature/footer-toast
+                /* ----- UTILITY ----- */
+        .mt-8 { margin-top: 8px; }
+        .text-muted { color: #6b7f94; }
+        .flex { display: flex; align-items: center; gap: 8px; }
+        .gap-6 { gap: 6px; }
+
+        /* Jacinta: Toast animation */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+=======
 
         // Highness-max: Dark mode toggle
 function toggleDarkMode() {
@@ -421,6 +440,7 @@ function toggleDarkMode() {
         });
     }
 }
+ main
     </style>
 </head>
 <body>
@@ -864,10 +884,40 @@ window.clearOrderResult = function () {
 };
     })(); // end IIFE — no global pollution except our two handlers + ticket opener
     // DEV-4: Copy Order ID to clipboard
+// Jacinta: Copy with toast notification (no alert popup)
 function copyOrderId(orderId) {
     navigator.clipboard.writeText(orderId).then(() => {
-        alert('✅ Copied ' + orderId + ' to clipboard!');
+        // Create a toast notification (sleek, non-intrusive)
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1a2b4c;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            z-index: 9999;
+            animation: slideUp 0.4s ease;
+            border-left: 4px solid #d4af37;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+        `;
+        toast.innerHTML = `<i class="fas fa-check-circle" style="color:#d4af37;font-size:1.2rem;"></i> Copied ${orderId} to clipboard!`;
+        document.body.appendChild(toast);
+// Auto-remove after 3 seconds
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => toast.remove(), 500);
+        }, 3000);
     }).catch(() => {
+        // Fallback if clipboard fails
         alert('⚠️ Could not copy. Please select the ID manually.');
     });
 }// Grace: Total orders counter - updates when a new order is added

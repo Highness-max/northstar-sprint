@@ -408,11 +408,14 @@
             </div>
 
             <div class="input-row">
-                <input type="text" id="refundInput" placeholder="e.g. #1001" aria-label="Order ID" />
-                <button onclick="handleRefundStatus()">
-                    <i class="fas fa-coins"></i> Check
-                </button>
-            </div>
+    <input type="text" id="refundInput" placeholder="e.g. #1001 (Ctrl+Enter)" aria-label="Order ID" />
+    <button onclick="handleRefundStatus()">
+        <i class="fas fa-coins"></i> Check
+    </button>
+    <button onclick="clearRefundResult()" style="background:#e2e8f0;color:#1a2b4c;border:none;padding:14px 20px;border-radius:40px;cursor:pointer;font-weight:600;transition:0.2s;display:inline-flex;align-items:center;gap:8px;font-family:inherit;">
+        <i class="fas fa-undo"></i> Clear
+    </button>
+</div>>
 
             <div id="refundResult" class="result-box">
                 <i class="fas fa-info-circle text-muted"></i> <span class="text-muted">Enter an order number to begin.</span>
@@ -789,6 +792,15 @@ document.addEventListener('keydown', function(e) {
 // Call it on page load
 window.addEventListener('load', updateTotalOrders);
   main
+
+// Highness-max: Clear Refund button function
+function clearRefundResult() {
+    document.getElementById('refundInput').value = '';
+    document.getElementById('refundResult').innerHTML = `
+        <i class="fas fa-info-circle text-muted"></i> 
+        <span class="text-muted">Cleared. Enter a new order.</span>
+    `;
+}
 
 </script>
 

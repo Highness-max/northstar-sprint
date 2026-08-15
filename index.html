@@ -766,19 +766,66 @@ function toggleDarkMode() {
         }
 
         // ---------- PUBLIC HANDLERS (called by onclick) ----------
-        window.handleOrderStatus = function() {
-            const input = document.getElementById('orderInput');
-            const result = document.getElementById('orderResult');
-            const lookup = lookupOrder(input.value);
-            renderOrderResult(result, lookup);
-        };
+        // koech-aaron: Loading spinner simulation for better UX
+window.handleOrderStatus = function() {
+    const input = document.getElementById('orderInput');
+    const result = document.getElementById('orderResult');
+    const val = input.value.trim();
+    
+    // If empty, show error immediately (no spinner)
+    if (val === '') {
+        result.innerHTML = `
+            <i class="fas fa-exclamation-triangle" style="color:var(--gold);"></i>
+            Please enter an Order ID (e.g., #1001).
+        `;
+        return;
+    }
+    
+    // Show loading spinner
+    result.innerHTML = `
+        <div style="text-align:center;padding:15px 0;">
+            <i class="fas fa-spinner fa-pulse" style="font-size:2rem;color:var(--gold);"></i>
+            <div style="margin-top:8px;color:#6b7f94;font-weight:500;">
+                <i class="fas fa-search"></i> Checking order status...
+            </div>
+        </div>
+    `;
+    
+    // Simulate API delay (500ms) then show result
+    setTimeout(() => {
+        const lookup = lookupOrder(val);
+        renderOrderResult(result, lookup);
+    }, 600);
+};
 
-        window.handleRefundStatus = function() {
-            const input = document.getElementById('refundInput');
-            const result = document.getElementById('refundResult');
-            const lookup = lookupOrder(input.value);
-            renderRefundResult(result, lookup);
-        };
+        // koech-aaron: Loading spinner for refund status
+window.handleRefundStatus = function() {
+    const input = document.getElementById('refundInput');
+    const result = document.getElementById('refundResult');
+    const val = input.value.trim();
+    
+    if (val === '') {
+        result.innerHTML = `
+            <i class="fas fa-exclamation-triangle" style="color:var(--gold);"></i>
+            Please enter an Order ID (e.g., #1001).
+        `;
+        return;
+    }
+    
+    result.innerHTML = `
+        <div style="text-align:center;padding:15px 0;">
+            <i class="fas fa-spinner fa-pulse" style="font-size:2rem;color:var(--gold);"></i>
+            <div style="margin-top:8px;color:#6b7f94;font-weight:500;">
+                <i class="fas fa-coins"></i> Checking refund status...
+            </div>
+        </div>
+    `;
+    
+    setTimeout(() => {
+        const lookup = lookupOrder(val);
+        renderRefundResult(result, lookup);
+    }, 600);
+};
 
         // ---------- DEFLECTION: Support Ticket (simulated) ----------
         window.openSupportTicket = function(orderId) {

@@ -49,7 +49,6 @@
             transition: var(--transition);
         }
 
-        /* ----- HEADER ----- */
         .header {
             display: flex;
             flex-direction: column;
@@ -90,14 +89,12 @@
             margin: 14px auto 0;
         }
 
-        /* ----- TWO‑COLUMN GRID (responsive) ----- */
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 32px;
         }
 
-        /* ----- CARDS (Apple‑style) ----- */
         .card {
             background: var(--card-bg);
             border-radius: 18px;
@@ -125,7 +122,6 @@
             text-align: center;
         }
 
-        /* ----- INPUT ROW ----- */
         .input-row {
             display: flex;
             flex-wrap: wrap;
@@ -182,7 +178,6 @@
             transform: scale(0.97);
         }
 
-        /* ----- RESULT AREA ----- */
         .result-box {
             background: #f8fafd;
             border-radius: 16px;
@@ -195,7 +190,6 @@
             transition: var(--transition);
         }
 
-        /* ----- STATUS BADGES (pill) ----- */
         .badge {
             display: inline-block;
             padding: 4px 14px;
@@ -212,7 +206,6 @@
         .badge-delivered  { background: #dff0e6; color: #1a6d4a; }
         .badge-refund     { background: #f0e6ff; color: #5e2e9e; }
 
-        /* ----- PROGRESS STEPPER (Apple‑style horizontal) ----- */
         .stepper {
             display: flex;
             align-items: center;
@@ -288,7 +281,6 @@
             background: var(--gold);
         }
 
-        /* ----- DEFLECTION FALLBACK (wow factor) ----- */
         .fallback-block {
             margin-top: 12px;
             padding: 12px 16px;
@@ -332,7 +324,6 @@
             box-shadow: 0 4px 12px rgba(10, 25, 47, 0.2);
         }
 
-        /* ----- RESPONSIVE (mobile first) ----- */
         @media (max-width: 780px) {
             .container { padding: 28px 18px; }
             .grid { grid-template-columns: 1fr; gap: 24px; }
@@ -348,25 +339,16 @@
             .fallback-btn { justify-content: center; }
         }
 
-        /* ----- UTILITY ----- */
         .mt-8 { margin-top: 8px; }
         .text-muted { color: #6b7f94; }
         .flex { display: flex; align-items: center; gap: 8px; }
         .gap-6 { gap: 6px; }
 
-        /* Jacinta: Toast animation */
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Captain: Smooth transitions for dark mode */
         .container, .card, .result-box, .input-row input {
             transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
@@ -376,7 +358,6 @@
 
 <div class="container">
 
-    <!-- ===== HEADER ===== -->
     <header class="header">
         <div class="header-brand">
             <i class="fas fa-store-alt"></i> Northstar Retail
@@ -385,7 +366,6 @@
             <i class="fas fa-robot"></i> Self‑Service Deflection · Order & Refund Status
         </div>
         <div class="header-divider"></div>
-        <!-- Captain: Dark Mode Toggle -->
         <div style="margin-top:15px;">
             <button onclick="toggleDarkMode()" style="background:var(--navy);color:white;border:none;padding:10px 24px;border-radius:40px;cursor:pointer;font-size:0.85rem;font-weight:600;transition:0.2s;font-family:inherit;box-shadow:0 4px 12px rgba(10,25,47,0.15);">
                 <i class="fas fa-moon"></i> Toggle Dark Mode
@@ -393,10 +373,8 @@
         </div>
     </header>
 
-    <!-- ===== TWO CARDS ===== -->
     <div class="grid">
 
-        <!-- ========== CARD 1: ORDER STATUS ========== -->
         <section class="card">
             <div class="card-title">
                 <i class="fas fa-box"></i> Order Status
@@ -420,7 +398,6 @@
             </div>
         </section>
 
-        <!-- ========== CARD 2: REFUND STATUS ========== -->
         <section class="card">
             <div class="card-title">
                 <i class="fas fa-undo-alt"></i> Refund Status
@@ -443,7 +420,6 @@
 
     </div>
 
-    <!-- ===== RESET ALL BUTTON (koech-aaron) ===== -->
     <div style="text-align:center;margin:30px 0 10px;">
         <button onclick="resetAll()" style="background:#e74c3c;color:white;border:none;padding:12px 32px;border-radius:40px;cursor:pointer;font-size:0.95rem;font-weight:600;transition:0.2s;box-shadow:0 4px 12px rgba(231,76,60,0.3);">
             <i class="fas fa-undo-alt"></i> Reset All
@@ -453,7 +429,6 @@
         </p>
     </div>
 
-    <!-- ===== FOOTER ===== -->
     <footer style="margin-top:20px;padding-top:20px;border-top:1px solid #e2e8f0;text-align:center;font-size:0.85rem;color:#6b7f94;">
         <p>
             <i class="fas fa-users"></i> Built by: 
@@ -478,70 +453,146 @@
 
 </div>
 
-<!-- ============================================================ -->
-<!-- ===== JAVASCRIPT — CLEAN, COMMENTED, PRODUCTION‑READY ===== -->
-<!-- ============================================================ -->
 <script>
     'use strict';
 
-        // ---------- WEEK 2 PIVOT: API INTEGRATION ----------
-        // Instead of hardcoded data, we use an async function to "fetch" data.
-        // (In a real company, this would be a URL like https://api.northstar.com/orders)
-        
-        // Simulated "Database" (still exists locally, but we access it via an API call)
-        const localDB = {
-            '#1001': { status: 'Delivered', deliveryDate: 'August 10, 2026', refund: null, steps: ['ordered', 'shipped', 'out-for-delivery', 'delivered'] },
-            '#1002': { status: 'Shipped', deliveryDate: 'August 18, 2026', refund: null, steps: ['ordered', 'shipped'] },
-            '#1003': { status: 'Processing', deliveryDate: 'August 22, 2026', refund: 'Approved · $79.99', steps: ['ordered'] },
-            '#1004': { status: 'Delivered', deliveryDate: 'August 5, 2026', refund: 'Pending · Reviewing return', steps: ['ordered', 'shipped', 'out-for-delivery', 'delivered'] },
-            '#1005': { status: 'Shipped', deliveryDate: 'August 16, 2026', refund: null, steps: ['ordered', 'shipped'] },
-            '#1006': { status: 'Processing', deliveryDate: 'August 25, 2026', refund: 'Approved · $45.00', steps: ['ordered'] },
-            '#1007': { status: 'Shipped', deliveryDate: 'August 28, 2026', refund: 'Pending · Waiting for return', steps: ['ordered', 'shipped'] }
+    // ============================================================
+    // WEEK 2 PIVOT: API INTEGRATION
+    // Instead of hardcoded data, we use an async function to "fetch" data.
+    // ============================================================
+
+    // ---------- MOCK DATABASE ----------
+    const localDB = {
+        '#1001': { status: 'Delivered', deliveryDate: 'August 10, 2026', refund: null, steps: ['ordered', 'shipped', 'out-for-delivery', 'delivered'] },
+        '#1002': { status: 'Shipped', deliveryDate: 'August 18, 2026', refund: null, steps: ['ordered', 'shipped'] },
+        '#1003': { status: 'Processing', deliveryDate: 'August 22, 2026', refund: 'Approved · $79.99 (refund in 2-3 days)', steps: ['ordered'] },
+        '#1004': { status: 'Delivered', deliveryDate: 'August 5, 2026', refund: 'Pending · We\'re reviewing your return request', steps: ['ordered', 'shipped', 'out-for-delivery', 'delivered'] },
+        '#1005': { status: 'Shipped', deliveryDate: 'August 16, 2026', refund: null, steps: ['ordered', 'shipped'] },
+        '#1006': { status: 'Processing', deliveryDate: 'August 25, 2026', refund: 'Approved · $45.00 (refund in 1-2 days)', steps: ['ordered'] },
+        '#1007': { status: 'Shipped', deliveryDate: 'August 28, 2026', refund: 'Pending · Waiting for return package', steps: ['ordered', 'shipped'] }
+    };
+
+    // ---------- THE PIVOT: API FETCH FUNCTION ----------
+    function fetchOrderFromAPI(orderId) {
+        return new Promise((resolve, reject) => {
+            console.log(`📡 API Call: Fetching ${orderId} from server...`);
+
+            setTimeout(() => {
+                const randomFail = Math.random() < 0.1; // 10% chance of server error
+
+                if (randomFail) {
+                    reject(new Error('Server temporarily unavailable (simulated)'));
+                    return;
+                }
+
+                const order = localDB[orderId];
+                if (order) {
+                    resolve({ success: true, order, id: orderId });
+                } else {
+                    resolve({ success: false, error: 'not_found', input: orderId });
+                }
+            }, 600);
+        });
+    }
+
+    // ---------- MODIFIED LOOKUP (Async/Await) ----------
+    async function lookupOrderAsync(rawInput) {
+        const trimmed = rawInput.trim();
+        if (trimmed === '') return { error: 'empty' };
+
+        const formatted = trimmed.startsWith('#') ? trimmed : `#${trimmed}`;
+
+        try {
+            const result = await fetchOrderFromAPI(formatted);
+            return result;
+        } catch (apiError) {
+            return { error: 'api_fail', message: apiError.message };
+        }
+    }
+
+    // ---------- HELPER: Format status badge HTML ----------
+    function getStatusBadge(status) {
+        const map = {
+            'Processing': '<span class="badge badge-processing"><i class="fas fa-sync-alt fa-fw"></i> Processing</span>',
+            'Shipped':    '<span class="badge badge-shipped"><i class="fas fa-truck fa-fw"></i> Shipped</span>',
+            'Delivered':  '<span class="badge badge-delivered"><i class="fas fa-check-circle fa-fw"></i> Delivered</span>'
         };
+        return map[status] || `<span class="badge">${status}</span>`;
+    }
 
-        // ---------- THE PIVOT: API FETCH FUNCTION ----------
-        // This simulates fetching data from a server over HTTP
-        function fetchOrderFromAPI(orderId) {
-            return new Promise((resolve, reject) => {
-                console.log(`📡 API Call: Fetching ${orderId} from server...`);
-                
-                // Simulate network delay (500ms)
-                setTimeout(() => {
-                    // Simulate a 90% success rate (teaches error handling!)
-                    const randomFail = Math.random() < 0.1; // 10% chance of server error
-                    
-                    if (randomFail) {
-                        reject(new Error('Server temporarily unavailable (simulated)'));
-                        return;
-                    }
+    // ---------- HELPER: Build progress stepper ----------
+    function buildStepper(orderSteps, currentStatus) {
+        const stepMap = {
+            'Processing': 0,
+            'Shipped': 1,
+            'out-for-delivery': 2,
+            'Delivered': 3
+        };
+        const activeIndex = stepMap[currentStatus] ?? 0;
 
-                    const order = localDB[orderId];
-                    if (order) {
-                        resolve({ success: true, order, id: orderId });
-                    } else {
-                        resolve({ success: false, error: 'not_found', input: orderId });
-                    }
-                }, 600); // 600ms delay mimics real API latency
-            });
+        const stepDefs = [
+            { icon: 'fa-clipboard-list', label: 'Ordered' },
+            { icon: 'fa-truck', label: 'Shipped' },
+            { icon: 'fa-route', label: 'In Transit' },
+            { icon: 'fa-home', label: 'Delivered' }
+        ];
+
+        let html = '<div class="stepper">';
+        stepDefs.forEach((def, idx) => {
+            let cls = 'step';
+            if (idx < activeIndex) cls += ' completed';
+            else if (idx === activeIndex) cls += ' active';
+            html += `
+                <div class="${cls}">
+                    <div class="dot"><i class="fas ${def.icon}"></i></div>
+                    <div class="label">${def.label}</div>
+                </div>
+            `;
+        });
+        html += '</div>';
+        return html;
+    }
+
+    // ---------- RENDER: Order Status result ----------
+    function renderOrderResult(resultDiv, lookup) {
+        if (lookup.error === 'empty') {
+            resultDiv.innerHTML = `
+                <i class="fas fa-exclamation-triangle" style="color:var(--gold);"></i>
+                Please enter an Order ID (e.g., #1001).
+            `;
+            return;
         }
 
-        // ---------- MODIFIED LOOKUP (Now uses Async/Await) ----------
-        // We rewrite the lookup to be async
-        async function lookupOrderAsync(rawInput) {
-            const trimmed = rawInput.trim();
-            if (trimmed === '') return { error: 'empty' };
-
-            const formatted = trimmed.startsWith('#') ? trimmed : `#${trimmed}`;
-            
-            try {
-                // Call our "API" (which calls the localDB)
-                const result = await fetchOrderFromAPI(formatted);
-                return result;
-            } catch (apiError) {
-                // If the API call fails, we show an error
-                return { error: 'api_fail', message: apiError.message };
-            }
+        if (lookup.error === 'api_fail') {
+            resultDiv.innerHTML = `
+                <i class="fas fa-server" style="color:#e74c3c;"></i> 
+                <strong>API Error:</strong> ${lookup.message}. Please refresh or try again later.
+            `;
+            return;
         }
+
+        if (lookup.success === false && lookup.error === 'not_found') {
+            resultDiv.innerHTML = `
+                <div class="fallback-block">
+                    <p>
+                        <i class="fas fa-robot"></i>
+                        <strong>We couldn't find <code>${lookup.input}</code>.</strong>
+                        Our bot is checking the warehouse system. In the meantime…
+                    </p>
+                    <button class="fallback-btn" onclick="openSupportTicket('${lookup.input}')">
+                        <i class="fas fa-ticket-alt"></i> Open a support ticket
+                    </button>
+                </div>
+                <div style="margin-top:8px;font-size:0.8rem;color:#6b7f94;">
+                    <i class="fas fa-info-circle"></i> Ticket will be auto‑filled with your order ID.
+                </div>
+            `;
+            return;
+        }
+
+        const o = lookup.order;
+        const badge = getStatusBadge(o.status);
+        const stepper = buildStepper(o.steps, o.status);
 
         resultDiv.innerHTML = `
             <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;">
@@ -576,7 +627,15 @@
             return;
         }
 
-        if (lookup.error === 'not_found') {
+        if (lookup.error === 'api_fail') {
+            resultDiv.innerHTML = `
+                <i class="fas fa-server" style="color:#e74c3c;"></i> 
+                <strong>API Error:</strong> ${lookup.message}. Please refresh or try again later.
+            `;
+            return;
+        }
+
+        if (lookup.success === false && lookup.error === 'not_found') {
             resultDiv.innerHTML = `
                 <div class="fallback-block">
                     <p>
@@ -639,61 +698,37 @@
         `;
     }
 
-    // ---------- PUBLIC HANDLERS ----------
-    window.handleOrderStatus = function() {
+    // ---------- PUBLIC HANDLERS (Async) ----------
+    window.handleOrderStatus = async function() {
         const input = document.getElementById('orderInput');
         const result = document.getElementById('orderResult');
         const val = input.value.trim();
 
         if (val === '') {
-            result.innerHTML = `
-                <i class="fas fa-exclamation-triangle" style="color:var(--gold);"></i>
-                Please enter an Order ID (e.g., #1001).
-            `;
+            result.innerHTML = `<i class="fas fa-exclamation-triangle" style="color:var(--gold);"></i> Please enter an Order ID.`;
             return;
         }
 
-        result.innerHTML = `
-            <div style="text-align:center;padding:15px 0;">
-                <i class="fas fa-spinner fa-pulse" style="font-size:2rem;color:var(--gold);"></i>
-                <div style="margin-top:8px;color:#6b7f94;font-weight:500;">
-                    <i class="fas fa-search"></i> Checking order status...
-                </div>
-            </div>
-        `;
+        result.innerHTML = `<div style="text-align:center;padding:15px 0;"><i class="fas fa-spinner fa-pulse" style="font-size:2rem;color:var(--gold);"></i><div style="margin-top:8px;">Calling API to fetch order...</div></div>`;
 
-        setTimeout(() => {
-            const lookup = lookupOrder(val);
-            renderOrderResult(result, lookup);
-        }, 600);
+        const lookup = await lookupOrderAsync(val);
+        renderOrderResult(result, lookup);
     };
 
-    window.handleRefundStatus = function() {
+    window.handleRefundStatus = async function() {
         const input = document.getElementById('refundInput');
         const result = document.getElementById('refundResult');
         const val = input.value.trim();
 
         if (val === '') {
-            result.innerHTML = `
-                <i class="fas fa-exclamation-triangle" style="color:var(--gold);"></i>
-                Please enter an Order ID (e.g., #1001).
-            `;
+            result.innerHTML = `<i class="fas fa-exclamation-triangle" style="color:var(--gold);"></i> Please enter an Order ID.`;
             return;
         }
 
-        result.innerHTML = `
-            <div style="text-align:center;padding:15px 0;">
-                <i class="fas fa-spinner fa-pulse" style="font-size:2rem;color:var(--gold);"></i>
-                <div style="margin-top:8px;color:#6b7f94;font-weight:500;">
-                    <i class="fas fa-coins"></i> Checking refund status...
-                </div>
-            </div>
-        `;
+        result.innerHTML = `<div style="text-align:center;padding:15px 0;"><i class="fas fa-spinner fa-pulse" style="font-size:2rem;color:var(--gold);"></i><div style="margin-top:8px;">Calling API to fetch refund...</div></div>`;
 
-        setTimeout(() => {
-            const lookup = lookupOrder(val);
-            renderRefundResult(result, lookup);
-        }, 600);
+        const lookup = await lookupOrderAsync(val);
+        renderRefundResult(result, lookup);
     };
 
     // ---------- HELPER FUNCTIONS ----------
@@ -847,9 +882,7 @@
         } else {
             alert(
                 `📧 Support Request Opened\n\n` +
-                `📋 Order ID: Not provided (please enter one first)\n` +rea
-
-                
+                `📋 Order ID: Not provided (please enter one first)\n` +
                 `👤 Agent: Assigned immediately\n` +
                 `📞 Response time: ~5-10 minutes\n\n` +
                 `✨ Please provide your order ID when the agent responds.`
@@ -879,10 +912,11 @@
     // ---------- AUTO-FOCUS & COUNTER ----------
     window.addEventListener('load', () => {
         document.getElementById('orderInput').focus();
-        const count = Object.keys(orderDatabase).length;
+        const count = Object.keys(localDB).length;
         const el = document.getElementById('totalOrders');
         if (el) el.textContent = count;
     });
+
 </script>
 
 </body>

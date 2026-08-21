@@ -484,139 +484,64 @@
 <script>
     'use strict';
 
-    // ---------- MOCK DATABASE ----------
-    const orderDatabase = {
-        '#1001': {
-            status: 'Delivered',
-            deliveryDate: 'August 10, 2026',
-            refund: null,
-            steps: ['ordered', 'shipped', 'out-for-delivery', 'delivered']
-        },
-        '#1002': {
-            status: 'Shipped',
-            deliveryDate: 'August 18, 2026',
-            refund: null,
-            steps: ['ordered', 'shipped']
-        },
-        '#1003': {
-            status: 'Processing',
-            deliveryDate: 'August 22, 2026',
-            refund: 'Approved · $79.99 (refund in 2‑3 days)',
-            steps: ['ordered']
-        },
-        '#1004': {
-            status: 'Delivered',
-            deliveryDate: 'August 5, 2026',
-            refund: 'Pending · We\'re reviewing your return request',
-            steps: ['ordered', 'shipped', 'out-for-delivery', 'delivered']
-        },
-        '#1005': {
-            status: 'Shipped',
-            deliveryDate: 'August 16, 2026',
-            refund: null,
-            steps: ['ordered', 'shipped']
-        },
-        '#1006': {
-            status: 'Processing',
-            deliveryDate: 'August 25, 2026',
-            refund: 'Approved · $45.00 (refund in 1‑2 days)',
-            steps: ['ordered']
-        },
-        '#1007': {
-            status: 'Shipped',
-            deliveryDate: 'August 28, 2026',
-            refund: 'Pending · Waiting for return package',
-            steps: ['ordered', 'shipped']
-        }
-    };
-
-    // ---------- HELPER: Format status badge HTML ----------
-    function getStatusBadge(status) {
-        const map = {
-            'Processing': '<span class="badge badge-processing"><i class="fas fa-sync-alt fa-fw"></i> Processing</span>',
-            'Shipped':    '<span class="badge badge-shipped"><i class="fas fa-truck fa-fw"></i> Shipped</span>',
-            'Delivered':  '<span class="badge badge-delivered"><i class="fas fa-check-circle fa-fw"></i> Delivered</span>'
+        // ---------- WEEK 2 PIVOT: API INTEGRATION ----------
+        // Instead of hardcoded data, we use an async function to "fetch" data.
+        // (In a real company, this would be a URL like https://api.northstar.com/orders)
+        
+        // Simulated "Database" (still exists locally, but we access it via an API call)
+        const localDB = {
+            '#1001': { status: 'Delivered', deliveryDate: 'August 10, 2026', refund: null, steps: ['ordered', 'shipped', 'out-for-delivery', 'delivered'] },
+            '#1002': { status: 'Shipped', deliveryDate: 'August 18, 2026', refund: null, steps: ['ordered', 'shipped'] },
+            '#1003': { status: 'Processing', deliveryDate: 'August 22, 2026', refund: 'Approved · $79.99', steps: ['ordered'] },
+            '#1004': { status: 'Delivered', deliveryDate: 'August 5, 2026', refund: 'Pending · Reviewing return', steps: ['ordered', 'shipped', 'out-for-delivery', 'delivered'] },
+            '#1005': { status: 'Shipped', deliveryDate: 'August 16, 2026', refund: null, steps: ['ordered', 'shipped'] },
+            '#1006': { status: 'Processing', deliveryDate: 'August 25, 2026', refund: 'Approved · $45.00', steps: ['ordered'] },
+            '#1007': { status: 'Shipped', deliveryDate: 'August 28, 2026', refund: 'Pending · Waiting for return', steps: ['ordered', 'shipped'] }
         };
-        return map[status] || `<span class="badge">${status}</span>`;
-    }
 
-    // ---------- HELPER: Build progress stepper ----------
-    function buildStepper(orderSteps, currentStatus) {
-        const stepMap = {
-            'Processing': 0,
-            'Shipped': 1,
-            'out-for-delivery': 2,
-            'Delivered': 3
-        };
-        const activeIndex = stepMap[currentStatus] ?? 0;
+        // ---------- THE PIVOT: API FETCH FUNCTION ----------
+        // This simulates fetching data from a server over HTTP
+        function fetchOrderFromAPI(orderId) {
+            return new Promise((resolve, reject) => {
+                console.log(`📡 API Call: Fetching ${orderId} from server...`);
+                
+                // Simulate network delay (500ms)
+                setTimeout(() => {
+                    // Simulate a 90% success rate (teaches error handling!)
+                    const randomFail = Math.random() < 0.1; // 10% chance of server error
+                    
+                    if (randomFail) {
+                        reject(new Error('Server temporarily unavailable (simulated)'));
+                        return;
+                    }
 
-        const stepDefs = [
-            { icon: 'fa-clipboard-list', label: 'Ordered' },
-            { icon: 'fa-truck', label: 'Shipped' },
-            { icon: 'fa-route', label: 'In Transit' },
-            { icon: 'fa-home', label: 'Delivered' }
-        ];
-
-        let html = '<div class="stepper">';
-        stepDefs.forEach((def, idx) => {
-            let cls = 'step';
-            if (idx < activeIndex) cls += ' completed';
-            else if (idx === activeIndex) cls += ' active';
-            html += `
-                <div class="${cls}">
-                    <div class="dot"><i class="fas ${def.icon}"></i></div>
-                    <div class="label">${def.label}</div>
-                </div>
-            `;
-        });
-        html += '</div>';
-        return html;
-    }
-
-    // ---------- CORE: Order Status lookup ----------
-    function lookupOrder(rawInput) {
-        const trimmed = rawInput.trim();
-        if (trimmed === '') return { error: 'empty' };
-
-        const formatted = trimmed.startsWith('#') ? trimmed : `#${trimmed}`;
-        const order = orderDatabase[formatted];
-        if (!order) return { error: 'not_found', input: formatted };
-
-        return { success: true, order, id: formatted };
-    }
-
-    // ---------- RENDER: Order Status result ----------
-    function renderOrderResult(resultDiv, lookup) {
-        if (lookup.error === 'empty') {
-            resultDiv.innerHTML = `
-                <i class="fas fa-exclamation-triangle" style="color:var(--gold);"></i>
-                Please enter an Order ID (e.g., #1001).
-            `;
-            return;
+                    const order = localDB[orderId];
+                    if (order) {
+                        resolve({ success: true, order, id: orderId });
+                    } else {
+                        resolve({ success: false, error: 'not_found', input: orderId });
+                    }
+                }, 600); // 600ms delay mimics real API latency
+            });
         }
 
-        if (lookup.error === 'not_found') {
-            resultDiv.innerHTML = `
-                <div class="fallback-block">
-                    <p>
-                        <i class="fas fa-robot"></i>
-                        <strong>We couldn't find <code>${lookup.input}</code>.</strong>
-                        Our bot is checking the warehouse system. In the meantime…
-                    </p>
-                    <button class="fallback-btn" onclick="openSupportTicket('${lookup.input}')">
-                        <i class="fas fa-ticket-alt"></i> Open a support ticket
-                    </button>
-                </div>
-                <div style="margin-top:8px;font-size:0.8rem;color:#6b7f94;">
-                    <i class="fas fa-info-circle"></i> Ticket will be auto‑filled with your order ID.
-                </div>
-            `;
-            return;
-        }
+        // ---------- MODIFIED LOOKUP (Now uses Async/Await) ----------
+        // We rewrite the lookup to be async
+        async function lookupOrderAsync(rawInput) {
+            const trimmed = rawInput.trim();
+            if (trimmed === '') return { error: 'empty' };
 
-        const o = lookup.order;
-        const badge = getStatusBadge(o.status);
-        const stepper = buildStepper(o.steps, o.status);
+            const formatted = trimmed.startsWith('#') ? trimmed : `#${trimmed}`;
+            
+            try {
+                // Call our "API" (which calls the localDB)
+                const result = await fetchOrderFromAPI(formatted);
+                return result;
+            } catch (apiError) {
+                // If the API call fails, we show an error
+                return { error: 'api_fail', message: apiError.message };
+            }
+        }
 
         resultDiv.innerHTML = `
             <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;">
@@ -922,7 +847,9 @@
         } else {
             alert(
                 `📧 Support Request Opened\n\n` +
-                `📋 Order ID: Not provided (please enter one first)\n` +
+                `📋 Order ID: Not provided (please enter one first)\n` +rea
+
+                
                 `👤 Agent: Assigned immediately\n` +
                 `📞 Response time: ~5-10 minutes\n\n` +
                 `✨ Please provide your order ID when the agent responds.`
